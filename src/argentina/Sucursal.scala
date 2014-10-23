@@ -1,0 +1,5 @@
+package argentina
+
+class Sucursal {
+
+}
