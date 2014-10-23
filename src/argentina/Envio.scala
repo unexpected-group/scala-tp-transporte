@@ -1,5 +1,5 @@
 package argentina
 
-class Envio {
+class Envio(val paquete: Paquete, val destino: Sucursal) {
 
 }
