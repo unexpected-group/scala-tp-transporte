@@ -1,5 +1,0 @@
-package argentina
-
-trait Transporte {
-
-}

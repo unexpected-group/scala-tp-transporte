@@ -1,4 +1,4 @@
-package argentina
+package model
 
 class Sucursal {
 
