@@ -2,6 +2,7 @@ package model
 
 trait Transporte {
 
+  var tipo_transporte: TipoTransporte = null
   var seguimiento: Seguimiento = null
   var capacidad: Int = 0
   var costo: Int = 0
