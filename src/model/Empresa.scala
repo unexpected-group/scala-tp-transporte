@@ -12,5 +12,4 @@ class Empresa {
   def cantidadSucursales = sucursales.size
   
   def cantidadTransportes = transportes .size
-
 }

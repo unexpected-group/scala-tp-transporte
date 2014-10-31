@@ -1,6 +1,6 @@
 package model
 
-class Camioneta extends Transporte {
+class Camion extends Transporte {
   
   capacidad = 45
   costo = 100

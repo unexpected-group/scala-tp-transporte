@@ -1,7 +1,7 @@
 package model
 
 trait Transporte {
-  
+ 
   var capacidad: Int = 0
   var costo: Int = 0
   var velocidad: Int = 0
