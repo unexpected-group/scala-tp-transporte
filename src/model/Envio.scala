@@ -1,6 +1,6 @@
 package model
 
-class Envio(var paquete: Paquete = null, var destino: Sucursal = null) {
+class Envio(var volumen: Int = 0, var destino: Sucursal = null) {
   
   def asignarTransporte(transporte: Transporte) = {
     transporte.agregarEnvio(this)
@@ -9,5 +9,5 @@ class Envio(var paquete: Paquete = null, var destino: Sucursal = null) {
   
   def esRefrigerdo = false
   
-  def volumen: Int = paquete.volumen
+  def esFragil = false
 }
