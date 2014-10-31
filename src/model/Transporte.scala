@@ -1,7 +1,8 @@
 package model
 
 trait Transporte {
- 
+
+  var seguimiento: Seguimiento = null
   var capacidad: Int = 0
   var costo: Int = 0
   var velocidad: Int = 0
@@ -17,4 +18,7 @@ trait Transporte {
     	envios = envio :: envios
     }
   }
+  
+  def asignarSeguimiento(seguimiento_nuevo: Seguimiento) = seguimiento = seguimiento_nuevo
+  
 }
