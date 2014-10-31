@@ -1,5 +1,13 @@
 package model
 
-class Furgoneta (val capacidad : Int = 9, val costo : Int = 40, val velocidad : Int = 80) extends Transporte {
+class Furgoneta () extends Transporte {
 	
+    capacidad = 9
+  
+    costo = 40
+    
+    velocidad = 80
+    
+  
+  
 }

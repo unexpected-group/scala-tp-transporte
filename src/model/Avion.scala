@@ -1,5 +1,12 @@
 package model
 
-class Avion (val capacidad : Int = 200, val costo : Int = 500, val velocidad : Int = 500) extends Transporte {
+class Avion () extends Transporte {
 
+	capacidad = 200
+  
+	costo = 500
+    
+	velocidad = 500
+    
+  
 }
