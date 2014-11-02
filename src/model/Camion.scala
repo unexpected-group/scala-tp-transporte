@@ -3,10 +3,19 @@ package model
 class Camion extends Transporte {
   
   capacidad = 45
-  costo = 100
+  costoTransporte = 100
   velocidad = 60 
+  
+  override def destinoCasaCentralUltimaSemana = if (destinoCasaCentral) 0.02 else 0
   
   override def cuantoPagaPeaje = 12
   
-  def destinoCasaCentral = if (destino.nombre.equalsIgnoreCase("Casa Central")) 0.02 else 0.0
+  override def cargo = if (origenCasaCentral || destinoCasaCentral) 0 else 1 + volumenOcupado / capacidad
+  
+  def llevaEnviosUrgentes = cantidadEnviosSegun(e => e.esUrgente) > 0
+  
+  def porcentajeVolumenEnviosUrgentes = cantidadEnviosSegun(e => e.esUrgente) / capacidad
+  
+  override def cargoPorLlevarSustanciasPeligrosasUrgentes =
+    if (tipo.esSustanciasPeligrosas && llevaEnviosUrgentes) 3 * porcentajeVolumenEnviosUrgentes else 0
 }
