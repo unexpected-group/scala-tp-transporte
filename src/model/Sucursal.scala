@@ -1,6 +1,6 @@
 package model
 
-class Sucursal(val capacidad: Int) {
+class Sucursal(val nombre: String, val capacidad: Int, val pais:String) {
 
   var paquetesAlmacenados: List[Paquete] = List()
   var enviosEntrantes: List[Envio] = List()
