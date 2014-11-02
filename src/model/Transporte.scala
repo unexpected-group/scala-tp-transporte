@@ -20,6 +20,8 @@ trait Transporte {
     }
   }
   
-  def asignarSeguimiento(seguimiento_nuevo: Seguimiento) = seguimiento = seguimiento_nuevo
+  def asignarSeguimiento(seguimientoNuevo: Seguimiento) = seguimiento = seguimientoNuevo
+  
+  def asignarTipoTransporte(tipoTransporte : TipoTransporte) = tipo = tipoTransporte
   
 }
