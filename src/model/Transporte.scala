@@ -2,56 +2,81 @@ package model
 
 trait Transporte extends CalculadorDistancia {
 
-  var capacidad: Int = 0
-  var costoTransporte: Int = 0
-  var velocidad: Int = 0
+  var capacidad: Double = 0
+  var costoTransporte: Double = 0
+  var velocidad: Double = 0 // no se usa en ningun lado por ahora
   var envios: List[Envio] = List()
   var origen: Sucursal = null
   var destino: Sucursal = null
   var seguimiento: Seguimiento = null
   var tipo: TipoTransporte = null
-  
+
   def agregarEnvio(envio: Envio) =
-  if (envio.destino.nombre == destino.nombre && envio.volumen < capacidadDisponible)
-	  envios = envio :: envios
-  
-  def cargo: Int
-  
+    if (envio.destino.nombre == destino.nombre && envio.volumen < capacidadDisponible)
+      envios = envio :: envios
+
+  def cargo: Double
+
   def origenCasaCentral = origen.nombre.equalsIgnoreCase("Casa Central")
-  
+
   def destinoCasaCentral = destino.nombre.equalsIgnoreCase("Casa Central")
 
   def capacidadDisponible = capacidad - envios.map(e => e.volumen).sum
-
+  
   def asignarDestino(sucursal: Sucursal) = destino = sucursal
-
+  
   def asignarSeguimiento(seguimientoNuevo: Seguimiento) = seguimiento = seguimientoNuevo
   
-  def asignarTipoTransporte(tipoTransporte : TipoTransporte) = tipo = tipoTransporte
+  def asignarTipoTransporte(tipoTransporte: TipoTransporte) = tipo = tipoTransporte
   
   def cuantoPagaPeaje = 0
-
+  
   def cantidadEnviosSegun(f: Envio => Boolean) = envios.count(f) // autor: Juan Pablo Jacob
-      
-  def precioEnviosRefrigerados = 5 * cantidadEnviosSegun(e => e.esRefrigerdo) 
   
-  def volumenOcupado = capacidad - capacidadDisponible
-  
-  def destinoCasaCentralUltimaSemana: Double = 0 // camion lo extiende
-  
-  def impusetoDistintosPaises: Double = 0 // avion lo extiende
-  
-  def destinoCasaCentralDiaVeinte: Double = 0 // avion lo extiende
+  def volumenOcupado: Double = capacidad - capacidadDisponible
   
   def pocoVolumenOcupado = volumenOcupado < 0.2 * capacidad
   
-  def cargoPorPocaOcupacion = if (pocoVolumenOcupado) cargo
-  
-  def costoPorSeguimiento = seguimiento.coeficiente * distanciaTerrestreEntre(origen, destino) * 2
-  
   def distancia = distanciaTerrestreEntre(origen, destino)
+
+  // condiciones
   
-  def costoPorTipoDeVehiculo = tipo.costo(distancia)
+  def costoPorPeajes: Double = cuantoPagaPeaje * cantidadPeajesEntre(origen, destino)
   
-  def cargoPorLlevarSustanciasPeligrosasUrgentes: Double = 0 
+  def costoEnviosRefrigerados: Double = 5 * cantidadEnviosSegun(e => e.esRefrigerdo)
+  
+  def impusetoDistintosPaises: Double = 0
+  
+  def revisionTecnica: Double = 0
+  
+  def enviaInsumos: Double = 0
+  
+  def cargoPorPocaOcupacion: Double = if (pocoVolumenOcupado) cargo else 1
+  
+  def costoPorSeguimiento: Double = seguimiento.coeficiente * distanciaTerrestreEntre(origen, destino) * 2
+  
+  def costoPorTipoDeVehiculo: Double = tipo.costo(distancia)
+  
+  def costoPorLlevarSustanciasPeligrosasUrgentes: Double = 0
+
+  // calculo de precios  
+
+  def precioEnvios = envios.map(e => e.precioBase).sum
+
+  def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
+
+  def costoViaje: Double = {
+    var precio: Double = costoBaseViaje
+      + costoPorPeajes
+      + costoEnviosRefrigerados
+      + impusetoDistintosPaises
+      + costoPorSeguimiento
+      + costoPorTipoDeVehiculo
+      + costoPorLlevarSustanciasPeligrosasUrgentes
+    precio += precio * revisionTecnica - precio * enviaInsumos
+    precio *= cargoPorPocaOcupacion
+    precio
+  }
+
+  def costoFinal: Double = precioEnvios - costoViaje
 }

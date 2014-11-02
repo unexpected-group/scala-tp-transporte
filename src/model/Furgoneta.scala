@@ -8,5 +8,5 @@ class Furgoneta extends Transporte {
   
   override def cuantoPagaPeaje = 6
   
-  override def cargo = if (cantidadEnviosSegun(e => e.esUrgente) >= 3) 0 else 2
+  override def cargo = if (cantidadEnviosSegun(e => e.esUrgente) >= 3) 1 else 2
 }
