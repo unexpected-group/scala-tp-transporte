@@ -1,4 +1,4 @@
-package model
+package objetos
 
 class Camion extends Transporte {
   

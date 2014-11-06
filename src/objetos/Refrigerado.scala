@@ -1,4 +1,4 @@
-package model
+package objetos
 
 class Refrigerado extends Envio {
   

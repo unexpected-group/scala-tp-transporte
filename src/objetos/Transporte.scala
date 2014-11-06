@@ -1,4 +1,4 @@
-package model
+package objetos
 
 trait Transporte extends CalculadorDistancia {
 
@@ -13,7 +13,7 @@ trait Transporte extends CalculadorDistancia {
 
   def agregarEnvio(envio: Envio) =
     if (envio.destino.nombre == destino.nombre && envio.volumen < capacidadDisponible)
-      envios = envio :: envios
+      envios :+ envio
 
   def cargo: Double
 

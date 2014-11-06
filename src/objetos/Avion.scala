@@ -1,4 +1,4 @@
-package model
+package objetos
 
 class Avion extends Transporte {
 

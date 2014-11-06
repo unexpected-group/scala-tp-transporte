@@ -1,4 +1,4 @@
-package model
+package objetos
 
 class Sucursal(val nombre: String, val capacidad: Int, val pais:String) {
 
@@ -12,7 +12,7 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais:String) {
 
   def agregarEnvioEntrante(envio: Envio) = {
     if (capacidadDisponible > envio.volumen) {
-      enviosEntrantes = envio :: enviosEntrantes
+      enviosEntrantes :+ envio
     }
   }
 }

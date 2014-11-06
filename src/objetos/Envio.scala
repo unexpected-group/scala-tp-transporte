@@ -1,4 +1,4 @@
-package model
+package objetos
 
 class Envio(var paquete: Paquete = null, var destino: Sucursal = null) {
   
