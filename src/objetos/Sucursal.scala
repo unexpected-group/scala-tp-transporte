@@ -12,14 +12,14 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
     enviosSalientes.map(p => p.volumen).sum + enviosEntrantes.map(e => e.volumen).sum
 
   def agregatTransporte(transporte: Transporte) = {
-    transportes :+ transporte
+    transportes = transportes :+ transporte
     transporte.origen = this
   }
 
   // cuando un cliente trae un paquete
   def agregarEnvioSaliente(envio: Envio) = {
     if (capacidadDisponible > envio.volumen)
-      enviosSalientes :+ envio
+      enviosSalientes = enviosSalientes :+ envio
     else
       throw new RuntimeException
   }
@@ -27,7 +27,7 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
   // son los envios que van a llegar que estan siendo transportados
   def agregarEnvioEntrante(envio: Envio) = {
     if (capacidadDisponible > envio.volumen)
-      enviosEntrantes :+ envio
+      enviosEntrantes = enviosEntrantes :+ envio
     else
       throw new RuntimeException
   }
@@ -36,6 +36,6 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
     for (e <- envios) {
       e.asignarTransporte(transporte)
     }
-    // enviosSalientes.dropWhile(envios.includes(e))
+    enviosSalientes = List()
   }
 }
