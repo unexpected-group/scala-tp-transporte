@@ -2,18 +2,22 @@ package objetos
 
 trait Transporte extends CalculadorDistancia {
 
+  var envios: List[Envio] = List()
   var capacidad: Double = 0
   var costoTransporte: Double = 0
-  var velocidad: Double = 0 // no se usa en ningun lado por ahora
-  var envios: List[Envio] = List()
+  var velocidad: Double = 0
   var origen: Sucursal = null
   var destino: Sucursal = null
   var seguimiento: Seguimiento = null
   var tipo: TipoTransporte = null
 
-  def agregarEnvio(envio: Envio) =
-    if (envio.destino.nombre == destino.nombre && envio.volumen < capacidadDisponible)
+  def agregarEnvio(envio: Envio) = {
+	if (volumenOcupado == 0) destino = envio.destino 
+    if (envio.destino == destino && envio.volumen < capacidadDisponible)
       envios :+ envio
+    else 
+      throw new RuntimeException
+  }
 
   def cargo: Double
 
@@ -61,11 +65,11 @@ trait Transporte extends CalculadorDistancia {
 
   // calculo de precios  
 
-  def precioEnvios = envios.map(e => e.precioBase).sum
+  private def precioEnvios = envios.map(e => e.precioBase).sum
 
-  def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
+  private def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
 
-  def costoViaje: Double = {
+  private def costoViaje: Double = {
     var precio: Double = costoBaseViaje
       + costoPorPeajes
       + costoEnviosRefrigerados

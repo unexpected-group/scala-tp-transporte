@@ -1,0 +1,5 @@
+package objetos
+
+class Estadisticas {
+
+}

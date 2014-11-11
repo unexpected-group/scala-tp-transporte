@@ -1,5 +1,5 @@
 package objetos
 
-class Paquete(val volumen: Int = 0) {
+class Paquete(val volumen: Int) {
 
 }
