@@ -12,9 +12,10 @@ trait Transporte extends CalculadorDistancia {
   var tipo: TipoTransporte = null
 
   def agregarEnvio(envio: Envio) = {
-	if (volumenOcupado == 0) destino = envio.destino 
+	if (volumenOcupado == 0) destino = envio.destino
+	
     if (envio.destino == destino && envio.volumen < capacidadDisponible)
-      envios :+ envio
+      envios = envios :+ envio
     else 
       throw new RuntimeException
   }
@@ -35,9 +36,9 @@ trait Transporte extends CalculadorDistancia {
   
   def cuantoPagaPeaje = 0
   
-  def cantidadEnviosSegun(f: Envio => Boolean) = envios.count(f) // autor: Juan Pablo Jacob
+  def cantidadEnviosSegun(f: Envio => Boolean) = envios.count(f)
   
-  def volumenOcupado: Double = capacidad - capacidadDisponible
+  def volumenOcupado = capacidad - capacidadDisponible
   
   def pocoVolumenOcupado = volumenOcupado < 0.2 * capacidad
   
@@ -57,7 +58,8 @@ trait Transporte extends CalculadorDistancia {
   
   def cargoPorPocaOcupacion: Double = if (pocoVolumenOcupado) cargo else 1
   
-  def costoPorSeguimiento: Double = seguimiento.coeficiente * distanciaTerrestreEntre(origen, destino) * 2
+  def costoPorSeguimiento: Double =
+    seguimiento.coeficiente * distanciaTerrestreEntre(origen, destino) * 2
   
   def costoPorTipoDeVehiculo: Double = tipo.costo(distancia)
   
@@ -65,9 +67,9 @@ trait Transporte extends CalculadorDistancia {
 
   // calculo de precios  
 
-  private def precioEnvios = envios.map(e => e.precioBase).sum
+  def precioEnvios = envios.map(e => e.precioBase).sum
 
-  private def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
+  def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
 
   private def costoViaje: Double = {
     var precio: Double = costoBaseViaje

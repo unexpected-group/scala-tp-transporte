@@ -16,7 +16,6 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
     transporte.origen = this
   }
 
-  // cuando un cliente trae un paquete
   def agregarEnvioSaliente(envio: Envio) = {
     if (capacidadDisponible > envio.volumen)
       enviosSalientes = enviosSalientes :+ envio
@@ -24,7 +23,6 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
       throw new RuntimeException
   }
 
-  // son los envios que van a llegar que estan siendo transportados
   def agregarEnvioEntrante(envio: Envio) = {
     if (capacidadDisponible > envio.volumen)
       enviosEntrantes = enviosEntrantes :+ envio
@@ -33,9 +31,7 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
   }
   
   def enviar(envios: List[Envio], transporte: Transporte) = {
-    for (e <- envios) {
-      e.asignarTransporte(transporte)
-    }
+    for (e <- envios) e.asignarTransporte(transporte)
     enviosSalientes = List()
   }
 }
