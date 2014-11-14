@@ -6,7 +6,7 @@ class Camion extends Transporte {
   costoTransporte = 100
   velocidad = 60 
   
-  override def revisionTecnica = if (destinoCasaCentral) 0.02 else 0
+  override def porcentajeRevisionTecnica = if (destinoCasaCentral) 0.02 else 0
   
   override def cuantoPagaPeaje = 12
   

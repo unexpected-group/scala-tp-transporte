@@ -52,9 +52,9 @@ trait Transporte extends CalculadorDistancia {
   
   def impusetoDistintosPaises: Double = 0
   
-  def revisionTecnica: Double = 0
+  def porcentajeRevisionTecnica: Double = 0
   
-  def enviaInsumos: Double = 0
+  def porcentajeEnvioInsumos: Double = 0
   
   def cargoPorPocaOcupacion: Double = if (pocoVolumenOcupado) cargo else 1
   
@@ -75,11 +75,11 @@ trait Transporte extends CalculadorDistancia {
     var precio: Double = costoBaseViaje
       + costoPorPeajes
       + costoEnviosRefrigerados
-      + impusetoDistintosPaises
       + costoPorSeguimiento
       + costoPorTipoDeVehiculo
       + costoPorLlevarSustanciasPeligrosasUrgentes
-    precio += precio * revisionTecnica - precio * enviaInsumos
+    precio += precio * porcentajeRevisionTecnica - precio * porcentajeEnvioInsumos
+    precio += precio * impusetoDistintosPaises
     precio *= cargoPorPocaOcupacion
     precio
   }

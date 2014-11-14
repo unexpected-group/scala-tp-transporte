@@ -1,6 +1,6 @@
 package funcional
 
-class Furgoneta extends Transporte {
+case class Furgoneta() extends Transporte {
 
   capacidad = 9
   costoTransporte = 40

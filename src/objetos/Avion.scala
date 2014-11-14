@@ -12,7 +12,7 @@ class Avion extends Transporte {
   
   override def impusetoDistintosPaises = if (origen.pais.equalsIgnoreCase(destino.pais)) 0 else 0.1
   
-  override def enviaInsumos = if (destino.nombre.equalsIgnoreCase("Casa Central")) 0.2 else 0
+  override def porcentajeEnvioInsumos = if (destino.nombre.equalsIgnoreCase("Casa Central")) 0.2 else 0
   
   override def costoPorSeguimiento = seguimiento.coeficiente * distanciaAereaEntre(origen, destino) * 2
   
