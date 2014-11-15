@@ -28,7 +28,7 @@ class SucursalTest {
     sucursal.agregarEnvioSaliente(envio)
     sucursal.agregarEnvioSaliente(envio)
     sucursal.agregarEnvioSaliente(envio)
-    assertEquals(sucursal.capacidadDisponible, 40)
+    assertEquals(40, sucursal.capacidadDisponible)
     sucursal.enviar(sucursal.enviosSalientes, new Avion())
     assertEquals(100, sucursal.capacidadDisponible)
   }

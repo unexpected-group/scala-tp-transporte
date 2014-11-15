@@ -33,6 +33,6 @@ class EnvioTest {
   def testEnvioDesignaDestinoTransporte = {
     val camion = new Camion()
     envio.asignarTransporte(camion)
-    assertEquals(camion.destino, envio.destino)
+    assertEquals(envio.destino, camion.destino)
   }
 }
