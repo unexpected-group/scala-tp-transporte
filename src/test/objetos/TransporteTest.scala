@@ -1,4 +1,4 @@
-package test_objetos
+package test.objetos
 
 import org.junit.Assert._
 import org.junit.Before
