@@ -11,7 +11,7 @@ class Sucursal(val nombre: String, val capacidad: Int, val pais: String) {
   def volumenOcupado =
     enviosSalientes.map(p => p.volumen).sum + enviosEntrantes.map(e => e.volumen).sum
 
-  def agregatTransporte(transporte: Transporte) = {
+  def agregarTransporte(transporte: Transporte) = {
     transportes = transportes :+ transporte
     transporte.origen = this
   }
