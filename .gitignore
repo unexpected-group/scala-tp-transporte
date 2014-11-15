@@ -5,7 +5,7 @@
 .lib/
 .idea/
 
-dist/
+dist/*
 target/
 lib_managed/
 src_managed/
@@ -15,5 +15,7 @@ project/plugins/project/
 .cache
 .scala_dependencies
 .worksheet
+.project
+.classpath
 
 /bin
