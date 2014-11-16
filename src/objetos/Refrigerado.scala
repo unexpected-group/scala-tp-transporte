@@ -1,6 +1,7 @@
 package objetos
 
-class Refrigerado extends Envio {
+class Refrigerado(paquete: Paquete = null, destino: Sucursal = null)
+  extends Envio(paquete, destino) {
   
   override def esRefrigerdo = true
   

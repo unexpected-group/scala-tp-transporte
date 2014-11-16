@@ -9,7 +9,7 @@ trait Transporte extends CalculadorDistancia {
   var origen: Sucursal = null
   var destino: Sucursal = null
   var seguimiento: Seguimiento = null
-  var tipo: TipoTransporte = null
+  var tipo: TipoTransporte = new Comun() // null object
 
   def agregarEnvio(envio: Envio) = {
 	if (volumenOcupado == 0) destino = envio.destino
@@ -71,18 +71,18 @@ trait Transporte extends CalculadorDistancia {
 
   def costoBaseViaje = costoTransporte + envios.map(e => e.costoBase).sum
 
-  private def costoViaje: Double = {
-    var precio: Double = costoBaseViaje
-      + costoPorPeajes
-      + costoEnviosRefrigerados
-      + costoPorSeguimiento
-      + costoPorTipoDeVehiculo
-      + costoPorLlevarSustanciasPeligrosasUrgentes
+  def costoViaje: Double = {
+    var precio = costoBaseViaje +
+    costoPorPeajes +
+    costoEnviosRefrigerados +
+    costoPorSeguimiento +
+    costoPorTipoDeVehiculo +
+    costoPorLlevarSustanciasPeligrosasUrgentes
     precio += precio * porcentajeRevisionTecnica - precio * porcentajeEnvioInsumos
     precio += precio * impusetoDistintosPaises
     precio *= cargoPorPocaOcupacion
     precio
   }
 
-  def costoFinal: Double = precioEnvios - costoViaje
+  def beneficioFinal: Double = precioEnvios - costoViaje
 }
