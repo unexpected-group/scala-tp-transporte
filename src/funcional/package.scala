@@ -16,9 +16,9 @@ package object funcional {
   }
 
   val costoPeaje: Transporte => Double = t => t match {
-    case Avion() => 0
-    case Camion() => 12
-    case Furgoneta() => 6
+    case Avion() => 0 * t.cantidadPeajes
+    case Camion() => 12 * t.cantidadPeajes
+    case Furgoneta() => 6 * t.cantidadPeajes
   }
 
   val costoEnviosRefrigerados: Transporte => Double = t => t match {
@@ -45,9 +45,28 @@ package object funcional {
     case t if (t.pocoVolumenOcupado) => t match {
       case Avion() => 3
       case Furgoneta() if (t.llevaPocosPaquetesUrgentes) => 2
-      case Camion() if (t.evaluarLugares) => 1 + t.volumenOcupado / t.capacidad 
+      case Camion() if (t.evaluarLugares) => 1 + t.volumenOcupado / t.capacidad
       case _ => 1
     }
     case _ => 1
+  }
+
+  val costoPorSeguimiento: Transporte => Double = t => t.seguimiento match {
+    case Gps() => 0.5 * t.distancia
+    case Video() => 3.74 * t.distancia
+  }
+
+  val costoPorTipoVehiculo: Transporte => Double = t => t.tipo match {
+    case SustanciasPeligrosas() => 600 * t.distancia
+    case Animales() => t.costoSegunDistancia
+    case _ => 0
+  }
+
+  val costoPorLlevarSustanciasPeligrosasUrgentes: Transporte => Double = t => t match {
+    case Camion() => t.tipo match {
+      case SustanciasPeligrosas() if (t.tieneAlgunEnvioUrgente) => 3 * t.porcentajeUrgentes
+      case _ => 0
+    }
+    case _ => 0
   }
 }

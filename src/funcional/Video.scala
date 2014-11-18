@@ -1,6 +1,3 @@
 package funcional
 
-class Video extends Seguimiento {
-  
-  def coeficiente = 3.74
-}
+case class Video() extends Seguimiento {}

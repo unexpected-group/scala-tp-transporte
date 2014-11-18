@@ -13,12 +13,19 @@ trait Transporte extends CalculadorDistancia {
 
   def agregarEnvio(envio: Envio) = {
 	if (volumenOcupado == 0) destino = envio.destino
-	
     if (envio.destino == destino && envio.volumen < capacidadDisponible)
       envios = envios :+ envio
     else 
       throw new RuntimeException
   }
+  
+  // agregado para simplicidad
+  
+  def cantidadPeajes = cantidadPeajesEntre(origen, destino)
+  def distanciaTerrestre = distanciaTerrestreEntre(origen, destino)
+  def distanciaAerea = distanciaAereaEntre(origen, destino)
+  
+  // metodos aux
 
   def cargo: Double
 
