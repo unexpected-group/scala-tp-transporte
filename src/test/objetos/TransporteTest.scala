@@ -3,19 +3,7 @@ package test.objetos
 import org.junit.Assert._
 import org.junit.Before
 import org.junit.Test
-import objetos.Sucursal
-import objetos.Envio
-import objetos.Paquete
-import objetos.Camion
-import objetos.Avion
-import objetos.Refrigerado
-import objetos.Furgoneta
-import objetos.Urgente
-import objetos.Gps
-import objetos.Refrigerado
-import objetos.Video
-import objetos.Animales
-import objetos.SustanciasPeligrosas
+import objetos._
 
 class TransporteTest {
 
@@ -59,6 +47,7 @@ class TransporteTest {
   def testUnCamionLLevaUnEnvioUrgentes = {
     val envio = new Urgente(paqueteGrande, destino)
     envio.asignarTransporte(camion)
+    
     assertEquals(120, camion.costoBaseViaje, 0.5)
     assertEquals(110, camion.precioEnvios, 0.5)
     assertEquals(-170, camion.beneficioFinal, 0.5)
@@ -70,6 +59,7 @@ class TransporteTest {
     val envio2 = new Refrigerado(paqueteChico, destino)
     envio1.asignarTransporte(furgoneta)
     envio2.asignarTransporte(furgoneta)
+    
     assertEquals(180, furgoneta.costoBaseViaje, 0.5)
     assertEquals(420, furgoneta.precioEnvios, 0.5)
     assertEquals(-634, furgoneta.beneficioFinal, 0.5)
@@ -91,6 +81,7 @@ class TransporteTest {
     envioRefrigerado5.asignarTransporte(avion)
     envioUrgente1.asignarTransporte(avion)
     envioUrgente2.asignarTransporte(avion)
+    
     assertEquals(890, avion.costoBaseViaje, 0.5)
     assertEquals(1270, avion.precioEnvios, 0.5)
     assertEquals(-479, avion.beneficioFinal, 0.5)

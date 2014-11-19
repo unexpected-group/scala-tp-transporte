@@ -1,5 +1,3 @@
 package funcional
 
-class Paquete(val volumen: Double) {
-
-}
+class Paquete(val volumen: Double) {}

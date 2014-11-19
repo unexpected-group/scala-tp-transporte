@@ -1,6 +1,6 @@
 package funcional
 
-trait Transporte extends CalculadorDistancia {
+class Transporte extends CalculadorDistancia {
 
   var capacidad: Double = 0
   var costoTransporte: Double = 0
@@ -22,21 +22,21 @@ trait Transporte extends CalculadorDistancia {
 
   // metodos aux
 
-  val evaluarLugares: Boolean = !(origenCasaCentral || destinoCasaCentral)
-
   val esUrgente: Envio => Boolean = { case Urgente() => true case _ => false }
 
-  val origenCasaCentral: Boolean = origen.nombre match {
+  def origenCasaCentral: Boolean = origen.nombre match {
     case "Casa Central" => true
     case _ => false
   }
 
-  val destinoCasaCentral: Boolean = destino.nombre match {
+  def destinoCasaCentral: Boolean = destino.nombre match {
     case "Casa Central" => true
     case _ => false
   }
 
-  val porcentajeUrgentes: Double = envios.filter(esUrgente).map(e => e.volumen).sum / capacidad
+  def evaluarLugares: Boolean = !(origenCasaCentral || destinoCasaCentral)
+
+  def porcentajeUrgentes: Double = envios.filter(esUrgente).map(e => e.volumen).sum / capacidad
 
   def cantidadEnviosSegun(f: Envio => Boolean) = envios.count(f)
 
@@ -52,7 +52,7 @@ trait Transporte extends CalculadorDistancia {
 
   def costoSegunDistancia: Double = if (distancia < 100) 50 else if (distancia < 200) 86 else 137
 
-  // viejos
+  // metodos auxiliares
 
   def agregarEnvio(envio: Envio) =
     if (envio.destino.nombre == destino.nombre && envio.volumen < capacidadDisponible)

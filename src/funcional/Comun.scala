@@ -1,5 +1,3 @@
 package funcional
 
-case class Comun() extends Envio {
-
-}
+case class Comun() extends Envio {}

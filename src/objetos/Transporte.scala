@@ -8,8 +8,8 @@ trait Transporte extends CalculadorDistancia {
   var velocidad: Double = 0
   var origen: Sucursal = null
   var destino: Sucursal = null
-  var seguimiento: Seguimiento = null
-  var tipo: TipoTransporte = new Comun() // null object
+  var seguimiento: Seguimiento = new SinSeguimiento // null object
+  var tipo: TipoTransporte = new SinTipo() // null object
 
   def agregarEnvio(envio: Envio) = {
 	if (volumenOcupado == 0) destino = envio.destino
@@ -72,7 +72,7 @@ trait Transporte extends CalculadorDistancia {
   
   def costoPorLlevarSustanciasPeligrosasUrgentes: Double = 0
 
-  // calculo de precios  
+  // calculo de costos  
 
   def precioEnvios = envios.map(e => e.precioBase).sum
 

@@ -1,5 +1,0 @@
-package funcional
-
-class Estadisticas {
-
-}

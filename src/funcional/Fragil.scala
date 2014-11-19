@@ -1,5 +1,3 @@
 package funcional
 
-case class Fragil() extends Envio {
-  
-}
+case class Fragil() extends Envio {}

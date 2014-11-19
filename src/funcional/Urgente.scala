@@ -1,5 +1,3 @@
 package funcional
 
-case class Urgente() extends Envio {
-
-}
+case class Urgente() extends Envio {}

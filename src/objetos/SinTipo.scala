@@ -1,6 +1,6 @@
 package objetos
 
-class Comun extends TipoTransporte {
+class SinTipo extends TipoTransporte {
   
   override def costo(distancia: Double) = 0
 }

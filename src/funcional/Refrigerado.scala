@@ -1,5 +1,3 @@
 package funcional
 
-case class Refrigerado() extends Envio {
-  
-}
+case class Refrigerado() extends Envio {}

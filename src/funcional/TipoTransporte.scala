@@ -1,3 +1,3 @@
 package funcional
 
-trait TipoTransporte {}
+class TipoTransporte {}

@@ -1,3 +1,3 @@
 package funcional
 
-trait Seguimiento {}
+class Seguimiento {}
