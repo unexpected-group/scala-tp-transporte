@@ -44,7 +44,7 @@ class TransporteTest {
   }
 
   @Test
-  def testUnCamionLLevaUnEnvioUrgentes = {
+  def testUnCamionLLevaUnEnvioUrgente = {
     val envio = new Urgente(paqueteGrande, destino)
     envio.asignarTransporte(camion)
     

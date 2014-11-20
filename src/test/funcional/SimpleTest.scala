@@ -25,13 +25,16 @@ class SimpleTest {
     furgoneta = Furgoneta()
 
     camion.origen = origen
+    camion.destino = destino
     camion.asignarSeguimiento(Gps())
 
     furgoneta.origen = origen
+    furgoneta.destino = destino
     furgoneta.asignarSeguimiento(Video())
     furgoneta.asignarTipoTransporte(Animales())
     
     avion.origen = origen
+    avion.destino = destino
     avion.asignarSeguimiento(Gps())
     avion.asignarTipoTransporte(SustanciasPeligrosas())
   }
@@ -44,7 +47,7 @@ class SimpleTest {
   }
 
   @Test
-  def testUnCamionLLevaUnEnvioUrgentes = {
+  def testUnCamionLLevaUnEnvioUrgente = {
     val envio = Urgente()
     envio.asignarPaquete(paqueteGrande)
     envio.asignarDestino(destino)

@@ -65,10 +65,10 @@ package object funcional {
   // calculo de costos
   
   def precioEnvios(t: Transporte): Double =
-    t.envios.map(e => e.precioCosto).map(precioCosto => precioCosto._1).sum
+    t.envios.map(e => e.precio).sum
     
   def costoBaseViaje(t: Transporte): Double =
-    t.costoTransporte + t.envios.map(e => e.precioCosto).map(precioCosto => precioCosto._2).sum
+    t.costoTransporte + t.envios.map(e => e.costo).sum
     
   def costoViaje(t: Transporte): Double = {
     var precio = costoBaseViaje(t) +

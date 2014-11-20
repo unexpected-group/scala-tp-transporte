@@ -15,12 +15,17 @@ class Envio() {
 
   def volumen = paquete.volumen
   
-  type PrecioCosto = (Double, Double)
+  val precio: Double = this match {
+    case Comun() => 80
+    case Urgente() => 110
+    case Fragil() => 120
+    case Refrigerado() => 210
+  }
   
-  val precioCosto: PrecioCosto = this match {
-    case Comun() => (80, 10)
-    case Urgente() => (110, 20)
-    case Fragil() => (120, 18)
-    case Refrigerado() => (210, 70)
+  val costo: Double = this match {
+    case Comun() => 10
+    case Urgente() => 20
+    case Fragil() => 18
+    case Refrigerado() => 70
   }
 }
