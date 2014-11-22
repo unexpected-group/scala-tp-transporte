@@ -56,7 +56,7 @@ class Transporte extends CalculadorDistancia {
 
   def agregarEnvio(envio: Envio) =
     if (envio.destino == destino && envio.volumen < capacidadDisponible)
-      envios :+ envio
+      envios = envios :+ envio
 
   def asignarDestino(sucursal: Sucursal) = destino = sucursal
 
