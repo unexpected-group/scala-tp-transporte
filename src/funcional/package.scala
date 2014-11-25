@@ -1,7 +1,7 @@
 package object funcional {
   
   val distintosPaises: Transporte => Boolean =
-    t => t.origen.pais.equalsIgnoreCase(t.destino.pais)
+    t => ! t.origen.pais.equalsIgnoreCase(t.destino.pais)
 
   val destinoCasaCentral: Transporte => Boolean =
     t => t.destino.nombre.equalsIgnoreCase("Casa Central")
@@ -43,13 +43,13 @@ package object funcional {
   }
 
   val costoPorSeguimiento: Transporte => Double = t => t.seguimiento match {
-    case Gps() => 0.5 * t.distancia
-    case Video() => 3.74 * t.distancia
+    case Gps() => 0.5 * t.distancia * 2
+    case Video() => 3.74 * t.distancia * 2
     case _ => 0
   }
 
   val costoPorTipoVehiculo: Transporte => Double = t => t.tipo match {
-    case SustanciasPeligrosas() => 600 * t.distancia
+    case SustanciasPeligrosas() => 600
     case Animales() => t.costoSegunDistancia
     case _ => 0
   }
@@ -71,16 +71,15 @@ package object funcional {
     t.costoTransporte + t.envios.map(e => e.costo).sum
     
   def costoViaje(t: Transporte): Double = {
-    var precio = costoBaseViaje(t) +
-    costoPorPeajes(t) + 
-    costoEnviosRefrigerados(t) +
-    costoPorSeguimiento(t) +
-    costoPorTipoVehiculo(t) +
-    costoPorLlevarSustanciasPeligrosasUrgentes(t)
-    precio += precio * porcentajeRevisionTecnica(t) - precio * porcentajeEnvioInsumos(t)
-    precio += precio * porcentajeImpuestoDistintosPaises(t)
-    precio *= cargoPorPocaOcupacion(t)
-    precio
+	val costos: List[Transporte => Double] = List(costoBaseViaje, costoPorPeajes, costoEnviosRefrigerados, 
+	costoPorSeguimiento, costoPorTipoVehiculo, costoPorLlevarSustanciasPeligrosasUrgentes)
+	  
+	var precio = costos.foldLeft(0D)((res,un_costo) => res + un_costo(t) )
+	precio += precio * porcentajeRevisionTecnica(t) - precio * porcentajeEnvioInsumos(t)
+	precio += precio * porcentajeImpuestoDistintosPaises(t)
+	precio *= cargoPorPocaOcupacion(t)
+    
+	precio
   }
 
   def beneficioFinal(t: Transporte): Double = precioEnvios(t) - costoViaje(t)

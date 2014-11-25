@@ -34,7 +34,7 @@ class SimpleTest {
     furgoneta.asignarTipoTransporte(Animales())
     
     avion.origen = origen
-    avion.destino = destino
+    avion.destino = extranjero
     avion.asignarSeguimiento(Gps())
     avion.asignarTipoTransporte(SustanciasPeligrosas())
   }
@@ -76,13 +76,13 @@ class SimpleTest {
 
   @Test
   def testUnAvionLLevaCincoEnviosRefrigeradosConDosUrgentes = {
-    for(x <- 1 to 5) {
+    for (x <- 1 to 5) {
       val envioRefrigerado = Refrigerado()
       envioRefrigerado.asignarPaquete(paqueteMediano)
       envioRefrigerado.asignarDestino(extranjero)
       envioRefrigerado.asignarTransporte(avion)
     }
-    for(x <- 1 to 2) {
+    for (x <- 1 to 2) {
       val envioUrgente = Urgente()
       envioUrgente.asignarPaquete(paqueteGrande)
       envioUrgente.asignarDestino(extranjero)
