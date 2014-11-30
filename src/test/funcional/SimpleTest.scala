@@ -4,6 +4,13 @@ import org.junit.Assert._
 import org.junit.Test
 import org.junit.Before
 import funcional._
+import funcional.Gps
+import funcional.Video
+import funcional.Animales
+import funcional.SustanciasPeligrosas
+import funcional.Urgente
+import funcional.Refrigerado
+import funcional.Refrigerado
 
 class SimpleTest {
   
@@ -41,9 +48,9 @@ class SimpleTest {
 
   @Test
   def testCostoDePeajes = {
-    assertEquals(0, costoPorPeajes(avion), 0.5)
-    assertEquals(60, costoPorPeajes(camion), 0.5)
-    assertEquals(30, costoPorPeajes(furgoneta), 0.5)
+    assertEquals((avion, 0), costoPorPeajes(avion, 0))
+    assertEquals((camion, 60), costoPorPeajes(camion, 0))
+    assertEquals((furgoneta, 30), costoPorPeajes(furgoneta, 0))
   }
 
   @Test
